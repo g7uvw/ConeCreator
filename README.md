@@ -11,7 +11,7 @@
 
 Cone Creator : A stupidly simple program that creates a 3D cone as a seris of 2D slices
                Created to scatch an itch, and to stop someone asking me to write this for them
-               If this is in anyway useful to you, please use it with me best wishes.
+               If this is in anyway useful to you, please use it with my best wishes.
 
 Useage :       Compile with clang or gcc, run.
                By default it will create an 8 megabyte file called cone.bin in the current
