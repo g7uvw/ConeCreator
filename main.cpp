@@ -23,35 +23,62 @@ Useage :       Compile with clang or gcc, run.
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include "tomhead.h"
 using namespace std;
 
-uint8_t XSize,YSize,ZSize,Radius;
+unsigned int XSize,XCentre,YCentre,YSize,ZSize,Radius;
+#define CurrentVoxel z*ZSize*YSize+y*YSize+x
 
-int main(int argc, char *argv[])
+int main()
 {
-    XSize = 200;
-    YSize = 200;
-    ZSize = 200;
+    XSize = 600;
+    YSize = 600;
+    ZSize = 600;
+    XCentre = XSize/2;
+    YCentre = YSize/2;
+
     vector<uint8_t> canvas;
-
-
     canvas.resize(XSize*YSize*ZSize);
-    for (uint8_t z = 0; z < ZSize; z++)
+
+    thead TomHead;
+    TomHead.xsize = XSize;
+    TomHead.ysize = YSize;
+    TomHead.zsize = ZSize;
+    //TomHead.owner = "DM";
+    //TomHead.comment = "A Computed Cone";
+
+
+    for (unsigned int z = 2; z < ZSize; z++)
     {
-        for (uint8_t x = 0; x < XSize; x++)
+        cout<<"Slice : " <<z<<endl;
+        for (unsigned int y = 0; y < YSize; y++)
         {
-            for (uint8_t y=0; y < YSize; y++)
+            for (unsigned int x=0; x < XSize; x++)
             {
-                Radius = (z+1)/2;
-                if (((x - XSize/2) * (x - XSize/2) + (y - YSize/2) * (y - YSize/2)) <= (Radius * Radius))
-                    canvas.at(z*ZSize*YSize+y*YSize+x) = 255;
+                Radius = z/2;
+
+                if (((x - XCentre) * (x - XCentre)) + ((y - YCentre) * (y - YCentre)) <= (Radius * Radius))
+                {
+                    canvas.at(CurrentVoxel) = 254;
+                    cout << "X = " << x <<endl;
+                    cout << "Y = " << y <<endl;
+                }
                 else
-                    canvas.at(z*ZSize*YSize+y*YSize+x) = 0;
+                    canvas.at(CurrentVoxel) = 0;
             }
         }
     }
+    cout << "Xcentre : " <<XCentre<<endl;
+    cout << "Ycentre : " <<YCentre<<endl;
     fstream file;
-    file.open("cone.bin",ios::in|ios::out|ios::binary|ios::trunc);
+    file.open("cone.tom",ios::in|ios::out|ios::binary|ios::trunc);
+    file.write((char *) &TomHead, sizeof(struct thead));
+
+    //for(unsigned long i=0;i<canvas.size();i++)
+    //{
+    //    file<<canvas[i];
+    //}
+
     file.write((char*)&*(canvas.begin()),canvas.size() * sizeof(uint8_t));
     file.close();
     exit(1);
