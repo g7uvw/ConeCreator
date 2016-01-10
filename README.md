@@ -8,7 +8,7 @@
     | |     | |   | | | \   | (        | |     | (\ (  | (     | (   ) |  | |  | |   | | (\ (
     | (____/| (___) | )  \  | (____/\  | (____/| ) \ \_| (____/| )   ( |  | |  | (___) | ) \ \__
     (_______(_______|/    )_(_______/  (_______|/   \__(_______|/     \|  )_(  (_______|/   \__/
-
+<pre>
 Cone Creator : A stupidly simple program that creates a 3D cone as a series of 2D slices
                Created to scatch an itch, and to stop someone asking me to write this for them
                If this is in anyway useful to you, please use it with my best wishes.
@@ -19,3 +19,4 @@ Useage :       Compile with clang or gcc, run.
                values.
                A sequential file is written out in [XY],Z format.
 
+</pre>
