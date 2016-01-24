@@ -31,9 +31,9 @@ unsigned int XSize,XCentre,YCentre,YSize,ZSize,Radius;
 
 int main()
 {
-    XSize = 600;
-    YSize = 600;
-    ZSize = 600;
+    XSize = 200;
+    YSize = 200;
+    ZSize = 200;
     XCentre = XSize/2;
     YCentre = YSize/2;
 
